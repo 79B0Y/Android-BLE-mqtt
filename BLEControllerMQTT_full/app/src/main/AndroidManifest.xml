@@ -1,16 +1,35 @@
-
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.linknlink.blecontroller">
-    <uses-permission android:name="android.permission.BLUETOOTH"/>
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
-    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT"/>
-    <uses-permission android:name="android.permission.BLUETOOTH_SCAN"/>
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <application android:label="BLE MQTT" android:icon="@mipmap/ic_launcher">
-        <service android:name=".BLEService" android:exported="false"/>
-        <receiver android:name=".MQTTConfigReceiver" android:exported="true">
-            <intent-filter><action android:name="com.linknlink.MQTT_CFG"/></intent-filter>
+
+    <!-- 基础蓝牙权限（Android 12+ 新增 CONNECT / SCAN） -->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+    <!-- 后台持久运行 -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <!-- MQTT 网络访问 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:label="BLE MQTT Controller"
+        android:icon="@mipmap/ic_launcher">
+
+        <!-- BLE & MQTT 主逻辑：前台 Service -->
+        <service
+            android:name=".BLEService"
+            android:exported="false"
+            android:foregroundServiceType="connectedDevice" />
+
+        <!-- ADB：动态修改 MQTT Broker 的广播接收器 -->
+        <receiver
+            android:name=".MQTTConfigReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.linknlink.MQTT_CFG" />
+            </intent-filter>
         </receiver>
+
     </application>
 </manifest>
