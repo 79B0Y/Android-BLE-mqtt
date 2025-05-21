@@ -1,1 +1,6 @@
-<mqtt host="tcp://127.0.0.1:1883" username="" password="" topic_prefix="ble/"/>
+<?xml version="1.0" encoding="utf-8"?>
+<mqtt
+    host="tcp://127.0.0.1:1883"
+    username=""
+    password=""
+    topic_prefix="ble/" />
