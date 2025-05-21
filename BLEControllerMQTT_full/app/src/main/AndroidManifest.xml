@@ -1,0 +1,16 @@
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.linknlink.blecontroller">
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <application android:label="BLE MQTT" android:icon="@mipmap/ic_launcher">
+        <service android:name=".BLEService" android:exported="false"/>
+        <receiver android:name=".MQTTConfigReceiver" android:exported="true">
+            <intent-filter><action android:name="com.linknlink.MQTT_CFG"/></intent-filter>
+        </receiver>
+    </application>
+</manifest>
