@@ -1,23 +1,41 @@
+plugins {
+    id 'com.android.application'
+}
 
-plugins { id 'com.android.application' }
-android{
+android {
+    // ▼ 编译版本
     compileSdk 33
-    defaultConfig{
+
+    defaultConfig {
         applicationId "com.linknlink.blecontroller"
         minSdk 24
         targetSdk 33
+
         versionCode 1
         versionName "1.0"
     }
-    buildTypes{
-        release{
+
+    buildTypes {
+        release {
+            // 如需混淆，打开 minifyEnabled 并配置 proguard-rules.pro
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
+                          'proguard-rules.pro'
         }
     }
+
+    // 可选：启用 Java 11 语法
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
 }
-dependencies{
+
+dependencies {
+    // Android 基础库
     implementation 'androidx.core:core:1.12.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
+
+    // ▼ Eclipse Paho MQTT 客户端
     implementation 'org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.2.5'
 }
